@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfinityEd — Documentos Legais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: hsl(255,40%,98%);
+      --fg: hsl(210,7%,11%);
+      --primary: hsl(221,43%,42%);
+      --primary-fg: hsl(0,0%,100%);
+      --secondary: hsl(204,79%,29%);
+      --muted: hsl(220,24%,93%);
+      --muted-fg: hsl(224,7%,29%);
+      --accent: hsl(221,34%,46%);
+      --card: hsl(0,0%,100%);
+      --card-border: hsl(220,24%,90%);
+      --border: hsl(220,24%,90%);
+      --destructive: hsl(0,84%,60%);
+      --radius: 0.75rem;
+      --nav-h: 60px;
+      --font: 'Mulish', sans-serif;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0/.05);
+      --shadow: 0 1px 3px 0 rgb(0 0 0/.10),0 1px 2px -1px rgb(0 0 0/.10);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0/.10),0 2px 4px -2px rgb(0 0 0/.10);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--fg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(252,251,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 clamp(1rem,5vw,2.5rem);
+      gap: 1.5rem;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--fg); margin-right: auto; }
+    .nav-logo svg { width: 30px; height: 30px; flex-shrink: 0; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-logo-name {
+      font-weight: 900; font-size: 1rem; letter-spacing: -0.03em;
+      background: linear-gradient(110deg,#081c46,#598eff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-logo-sub { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); }
+    .nav-tabs { display: flex; gap: 0.25rem; list-style: none; }
+    .nav-tabs button {
+      font-family: var(--font); font-size: 0.8rem; font-weight: 700;
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid transparent; background: none; color: var(--muted-fg);
+      cursor: pointer; transition: all .18s; white-space: nowrap;
+    }
+    .nav-tabs button:hover { background: var(--muted); color: var(--fg); }
+    .nav-tabs button.active { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+    @media (max-width: 480px) {
+      .nav-tabs button { font-size: 0.72rem; padding: 5px 10px; }
+      .nav-logo-sub { display: none; }
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(145deg,hsl(221,43%,18%) 0%,hsl(204,79%,22%) 100%);
+      color: #fff;
+      padding: clamp(2.5rem,6vw,4.5rem) clamp(1rem,5vw,2.5rem) clamp(2rem,4vw,3.5rem);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 80% at 90% -10%,rgba(89,142,255,.18) 0%,transparent 70%),
+        repeating-linear-gradient(-48deg,transparent,transparent 44px,rgba(255,255,255,.025) 44px,rgba(255,255,255,.025) 45px);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      color: hsl(221,80%,80%); border: 1px solid rgba(89,142,255,.35);
+      border-radius: 999px; padding: 4px 12px; margin-bottom: 1.1rem;
+    }
+    .hero h1 { font-family: var(--font); font-weight: 900; font-size: clamp(1.9rem,5vw,3.4rem); line-height: 1.08; letter-spacing: -0.04em; margin-bottom: 0.7rem; }
+    .hero h1 em { font-style: normal; background: linear-gradient(90deg,#7eb3ff,#aaccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 0.9375rem; color: rgba(255,255,255,.65); max-width: 520px; font-weight: 400; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; font-size: 0.72rem; color: rgba(255,255,255,.4); font-weight: 600; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .hero-meta span::before { content: '·'; color: rgba(255,255,255,.25); }
+    .hero-meta span:first-child::before { display: none; }
+
+    /* LAYOUT */
+    .layout { display: grid; grid-template-columns: 210px 1fr; max-width: 1060px; margin: 0 auto; padding: 2.5rem clamp(1rem,4vw,2rem); align-items: start; }
+    @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: calc(var(--nav-h) + 1.25rem); padding-right: 1.75rem; }
+    .toc-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted-fg); margin-bottom: 0.6rem; }
+    .toc-list { list-style: none; }
+    .toc-list a { display: block; font-size: 0.78rem; font-weight: 500; color: var(--muted-fg); text-decoration: none; padding: 4px 0 4px 12px; border-left: 2px solid var(--border); transition: all .15s; line-height: 1.35; }
+    .toc-list a:hover { color: var(--fg); border-color: var(--muted-fg); }
+    .toc-list a.active { color: var(--primary); border-color: var(--primary); font-weight: 800; }
+
+    /* SECTIONS */
+    .page { display: none; }
+    .page.active { display: block; }
+    .section-block { margin-bottom: 2.25rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--border); }
+    .section-block:last-child { border-bottom: none; margin-bottom: 0; }
+    .section-block h2 { font-family: var(--font); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.55rem; }
+    .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; background: var(--primary); color: #fff; font-size: 0.65rem; font-weight: 800; flex-shrink: 0; }
+    .section-block h3 { font-weight: 700; font-size: 0.875rem; margin: 1.2rem 0 0.45rem; color: var(--fg); }
+    .section-block p { color: var(--muted-fg); margin-bottom: 0.6rem; font-size: 0.9rem; }
+    .section-block p strong { color: var(--fg); }
+    .section-block ul, .section-block ol { padding-left: 1.2rem; color: var(--muted-fg); font-size: 0.9rem; }
+    .section-block li { margin-bottom: 0.35rem; }
+    .section-block li strong { color: var(--fg); }
+
+    /* CALLOUTS */
+    .callout { border-radius: var(--radius); padding: 0.875rem 1.1rem; margin: 1.1rem 0; font-size: 0.85rem; display: flex; gap: 0.65rem; align-items: flex-start; line-height: 1.55; }
+    .callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout.info    { background: hsl(221,60%,95%); border: 1px solid hsl(221,43%,82%); color: hsl(221,43%,28%); }
+    .callout.warn    { background: hsl(38,90%,95%);  border: 1px solid hsl(38,80%,78%);  color: hsl(30,60%,30%); }
+    .callout.success { background: hsl(140,50%,94%); border: 1px solid hsl(140,40%,76%); color: hsl(140,50%,25%); }
+    .callout.danger  { background: hsl(0,80%,96%);   border: 1px solid hsl(0,60%,82%);   color: hsl(0,60%,35%); }
+    .callout strong { display: block; margin-bottom: 0.2rem; font-weight: 800; }
+
+    /* PILLS */
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0; }
+    .pill { font-size: 0.72rem; font-weight: 700; padding: 3px 11px; border-radius: 999px; background: var(--muted); border: 1px solid var(--border); color: var(--muted-fg); }
+    .pill.blue   { background: hsl(221,60%,94%); border-color: hsl(221,43%,78%); color: hsl(221,43%,28%); }
+    .pill.green  { background: hsl(140,50%,93%); border-color: hsl(140,40%,74%); color: hsl(140,50%,24%); }
+    .pill.orange { background: hsl(38,90%,93%);  border-color: hsl(38,70%,74%);  color: hsl(30,60%,28%); }
+
+    /* TABLES */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.9rem 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .data-table th { font-weight: 800; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.09em; text-align: left; padding: 8px 12px; background: var(--muted); color: var(--muted-fg); border-bottom: 1px solid var(--border); }
+    .data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--muted-fg); vertical-align: top; }
+    .data-table td strong { color: var(--fg); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: hsl(221,40%,98%); }
+
+    /* COOKIE CARDS */
+    .cookie-card { border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden; margin: 0.9rem 0; box-shadow: var(--shadow-sm); }
+    .cookie-card-header { background: var(--muted); padding: 0.55rem 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 800; border-bottom: 1px solid var(--border); }
+    .cookie-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .cookie-dot.essential  { background: #22c55e; }
+    .cookie-dot.functional { background: hsl(221,43%,52%); }
+    .cookie-dot.third      { background: #f59e0b; }
+    .cookie-card table { width: 100%; border-collapse: collapse; font-size: 0.79rem; }
+    .cookie-card table th { padding: 6px 12px; text-align: left; color: var(--muted-fg); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em; }
+    .cookie-card table td { padding: 7px 12px; border-top: 1px solid var(--border); color: var(--muted-fg); vertical-align: top; }
+    .cookie-card table td strong { color: var(--fg); }
+    code { font-size: 0.75rem; background: var(--muted); border-radius: 4px; padding: 1px 5px; font-family: 'Courier New',monospace; color: var(--fg); }
+
+    /* CONTACT CARD */
+    .contact-card { border: 1px solid var(--card-border); border-radius: var(--radius); padding: 1.1rem 1.35rem; background: var(--card); box-shadow: var(--shadow-sm); display: grid; gap: 0.45rem; font-size: 0.875rem; }
+    .contact-row { display: flex; gap: 0.5rem; align-items: baseline; }
+    .contact-label { color: var(--muted-fg); font-weight: 700; min-width: 90px; font-size: 0.8rem; }
+    .contact-card a { color: var(--primary); font-weight: 700; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 1.5rem clamp(1rem,5vw,2.5rem); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--muted-fg); }
+    .footer-logo { display: flex; align-items: center; gap: 0.5rem; }
+    .footer-logo svg { width: 22px; height: 22px; }
+    .footer-logo-name { font-weight: 900; font-size: 0.9rem; letter-spacing: -0.02em; background: linear-gradient(110deg,#081c46,#598eff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { color: var(--muted-fg); font-weight: 700; }
+    .footer-links a:hover { color: var(--fg); text-decoration: none; }
+
+    /* SCROLL TOP */
+    #scrollTop { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border-radius: 999px; background: var(--primary); color: #fff; border: none; cursor: pointer; font-size: 1rem; box-shadow: var(--shadow-md); opacity: 0; pointer-events: none; transition: opacity .2s,transform .2s; display: flex; align-items: center; justify-content: center; }
+    #scrollTop.visible { opacity: 1; pointer-events: auto; }
+    #scrollTop:hover { transform: translateY(-2px); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .page.active .section-block { animation: fadeUp .3s ease both; }
+    .page.active .section-block:nth-child(1)  { animation-delay:.04s; }
+    .page.active .section-block:nth-child(2)  { animation-delay:.08s; }
+    .page.active .section-block:nth-child(3)  { animation-delay:.12s; }
+    .page.active .section-block:nth-child(4)  { animation-delay:.16s; }
+    .page.active .section-block:nth-child(5)  { animation-delay:.20s; }
+    .page.active .section-block:nth-child(6)  { animation-delay:.24s; }
+    .page.active .section-block:nth-child(7)  { animation-delay:.28s; }
+    .page.active .section-block:nth-child(8)  { animation-delay:.32s; }
+    .page.active .section-block:nth-child(9)  { animation-delay:.36s; }
+    .page.active .section-block:nth-child(10) { animation-delay:.40s; }
+    .page.active .section-block:nth-child(11) { animation-delay:.44s; }
+    .page.active .section-block:nth-child(12) { animation-delay:.48s; }
+    .page.active .section-block:nth-child(13) { animation-delay:.52s; }
+
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: hsl(220,24%,80%); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(220,24%,68%); }
+    mark { background: linear-gradient(90deg,hsl(38,90%,82%),hsl(50,90%,88%)); border-radius: 3px; padding: 0 3px; color: inherit; }
+  </style>
+</head>
+<body>
+
+<!-- Logo SVG (inline symbol) -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGrad" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(593.546,-415.605,128.647,183.726,218.406,721.526)">
+      <stop offset="0" stop-color="#081c46"/>
+      <stop offset="1" stop-color="#598eff"/>
+    </linearGradient>
+  </defs>
+  <symbol id="ie-logo" viewBox="0 0 1024 1024">
+    <path fill-rule="evenodd" fill="#0d1933" d="m424.73 377.29q34.77 27.98 66.22 60.57-29.51 27.89-58.95 55.72-19.6-14.73-36.35-33.11-30.1-26.88-62.99-50.07-30.71-18.98-66.22-25.84-43.71-7.85-80.76 15.34-51.95 30.26-62.19 90.45-1.99 20.62 0.81 40.38 12.55 90.49 101.76 110.64 24.35 1.43 48.45 0-16.55 7.27-33.92 12.12-17.33 5.45-35.53 7.27-61.81 8.95-117.91-17.77-5.96-3.53-10.5-8.89-49.02-80.12-30.69-172.82 28.58-105.29 130.03-144.56 100.66-28.57 192.21 22.61 29.17 17.8 56.53 37.96z"/>
+    <path fill-rule="evenodd" fill="url(#logoGrad)" d="m941.59 375.67q-109.48-44.82-211.59 14.54-30.16 16.3-58.15 36.34-36.81 31.57-72.68 63.8-80.43 75.99-163.14 149.41-55.07 47.34-124.37 71.07-129.48 38-222.09-58.96-1.61-1.61 0-3.23 26.12 14.09 55.73 18.58 30.69 1.61 61.37 0 16.68-1.97 32.31-7.27 34.68-9.26 66.22-26.65 29.53-17.59 56.53-38.77 90.93-76.37 176.06-159.9 27.15-24.34 54.92-47.65 59.98-52.62 137.29-75.11 100.61-21.99 184.13 37.15 14.95 12.12 27.46 26.65z"/>
+    <path fill-rule="evenodd" fill="#0d1933" d="m951.28 386.98q47.31 64.8 40.38 145.37-14.87 128.27-134.87 176.05-104.96 32.82-199.47-23.42-64.25-40.79-118.72-94.49-1.62-1.61 0-3.23 28.28-25.45 54.11-53.3 2.23-1.94 4.84-0.81 49.21 50.05 108.22 87.23 43.27 26.56 93.68 22.61 95.77-19.85 107.42-117.1 6.2-103.54-91.26-138.1-28.9-6.32-58.15-2.43-1.79 0.32-3.23-0.8 99.09-44.51 197.05 2.42z"/>
+  </symbol>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://infinityed.vercel.app" target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#ie-logo"/></svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">InfinityEd</span>
+      <span class="nav-logo-sub">Documentos Legais</span>
+    </div>
+  </a>
+  <ul class="nav-tabs">
+    <li><button class="active" onclick="showPage('privacy',this)">Privacidade</button></li>
+    <li><button onclick="showPage('terms',this)">Termos de Uso</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">&#x2696;&#xFE0F; Documentos Legais</div>
+    <h1 id="heroTitle">Política de <em>Privacidade</em></h1>
+    <p id="heroSub">Transparência total sobre como o InfinityEd coleta, usa e protege seus dados — em conformidade com a LGPD e o ECA Digital.</p>
+    <div class="hero-meta">
+      <span>Versão 2.0 — Maio de 2026</span>
+      <span>LGPD — Lei nº 13.709/2018</span>
+      <span>ECA Digital — Lei nº 13.431/2017</span>
+      <span>Web App + Android</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <aside class="sidebar">
+    <div class="toc-label">Nesta página</div>
+    <ul class="toc-list" id="tocList"></ul>
+  </aside>
+  <main>
+
+    <!-- POLÍTICA DE PRIVACIDADE -->
+    <div id="privacy" class="page active">
+
+      <div class="section-block" data-toc="Introdução e Escopo">
+        <h2><span class="num">1</span> Introdução e Escopo</h2>
+        <p>Esta Política de Privacidade descreve como o <strong>InfinityEd</strong> coleta, armazena e processa dados dos seus usuários. A plataforma é uma ferramenta educacional desenvolvida para o <strong>Colégio Estadual Dr. Onério Pereira Vieira</strong>, em Quirinópolis-GO, disponível primariamente como <mark>Web App React</mark> (infinityed.vercel.app) e também como aplicativo Android.</p>
+        <div class="callout warn">
+          <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+          <div><strong>Independência Institucional</strong>Esta solução é desenvolvida de forma independente pela equipe local. Embora autorizada pela gestão escolar, <strong>não possui vínculo oficial com o Governo do Estado de Goiás</strong> ou suas secretarias.</div>
+        </div>
+        <p>Ao acessar o InfinityEd — via Web App ou app Android — você concorda com as práticas descritas nesta Política.</p>
+      </div>
+
+      <div class="section-block" data-toc="Controlador de Dados (LGPD)">
+        <h2><span class="num">2</span> Controlador de Dados (LGPD)</h2>
+        <p>Em conformidade com o <strong>Art. 5º, VI da LGPD</strong>, o responsável pelo tratamento dos dados é:</p>
+        <div class="contact-card">
+          <div class="contact-row"><span class="contact-label">Plataforma</span><span>InfinityEd</span></div>
+          <div class="contact-row"><span class="contact-label">Unidade</span><span>Col. Est. Dr. Onério Pereira Vieira — Quirinópolis, GO</span></div>
+          <div class="contact-row"><span class="contact-label">Web App</span><a href="https://infinityed.vercel.app" target="_blank" rel="noopener">infinityed.vercel.app</a></div>
+          <div class="contact-row"><span class="contact-label">E-mail (DPO)</span><a href="mailto:infinityed.contato@proton.me">infinityed.contato@proton.me</a></div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Dados dos Alunos">
+        <h2><span class="num">3</span> Dados dos Alunos (Usuários Finais)</h2>
+        <p>O InfinityEd preza pelo <strong>anonimato e privacidade máxima dos estudantes</strong>, especialmente por atender majoritariamente menores de idade, em conformidade com o <strong>ECA Digital (Lei nº 13.431/2017)</strong> e o <strong>Art. 14 da LGPD</strong>.</p>
+        <div class="callout success">
+          <span class="callout-icon">&#x2705;</span>
+          <div><strong>Sem Cadastro Pessoal</strong>Não solicitamos nome completo, CPF, e-mail, matrícula ou qualquer documento pessoal dos alunos.</div>
+        </div>
+        <h3>O que coletamos dos alunos</h3>
+        <ul>
+          <li><strong>Preferências de Navegação:</strong> Série, Turma e Turno — usados apenas para filtrar o conteúdo. Não vinculados a identidade pessoal.</li>
+          <li><strong>Tokens de Dispositivo (Anônimos):</strong> Para notificações push, serviços de terceiros (OneSignal e FCM) geram um token anônimo vinculado ao dispositivo, não à pessoa.</li>
+          <li><strong>Dados de Sessão Web (Cookies/localStorage):</strong> Detalhados na Seção 8.</li>
+        </ul>
+        <div class="callout info">
+          <span class="callout-icon">&#x1F6E1;&#xFE0F;</span>
+          <div><strong>ECA Digital — Proteção de Menores</strong>Por atender majoritariamente estudantes menores de 18 anos, adotamos o princípio de <strong>coleta mínima de dados</strong>, conforme Art. 14 §1º da LGPD e as diretrizes do ECA Digital.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Dados de Professores">
+        <h2><span class="num">4</span> Dados de Professores e Acesso Administrativo</h2>
+        <p>O acesso para publicação é restrito e não permite auto-cadastro via aplicativo.</p>
+        <h3>Dados tratados</h3>
+        <ul>
+          <li><strong>Primeiro Nome</strong> — identificação funcional pública</li>
+          <li><strong>Disciplinas e Turmas</strong> — vinculação de conteúdo</li>
+          <li><strong>Credencial de Acesso</strong> — senha gerada aleatoriamente, entregue pessoalmente</li>
+        </ul>
+        <div class="callout info">
+          <span class="callout-icon">&#x1F510;</span>
+          <div><strong>Consentimento (Art. 7º, I da LGPD)</strong>Ao aceitar a credencial e realizar o primeiro login, o professor consente com o tratamento desses dados mínimos para execução das funcionalidades do sistema.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Infraestrutura e Terceiros">
+        <h2><span class="num">5</span> Infraestrutura e Terceiros</h2>
+        <p>O InfinityEd não mantém servidores físicos próprios. Utilizamos infraestrutura de nuvem:</p>
+        <table class="data-table">
+          <thead><tr><th>Serviço</th><th>Função</th><th>Política</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Google Firebase</strong> — Firestore &amp; Realtime DB</td><td>Banco de dados em nuvem (postagens, cardápios, turmas)</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Ver →</a></td></tr>
+            <tr><td><strong>Firebase Cloud Messaging</strong></td><td>Envio de notificações push</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Ver →</a></td></tr>
+            <tr><td><strong>OneSignal</strong></td><td>Gestão e distribuição de notificações</td><td><a href="https://onesignal.com/privacy_policy" target="_blank" rel="noopener">Ver →</a></td></tr>
+            <tr><td><strong>Vercel</strong></td><td>Hospedagem e CDN do Web App</td><td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Ver →</a></td></tr>
+          </tbody>
+        </table>
+        <p>Todos os dados trafegam via conexões criptografadas <strong>HTTPS/TLS</strong>.</p>
+      </div>
+
+      <div class="section-block" data-toc="Finalidades e Base Legal">
+        <h2><span class="num">6</span> Finalidades e Base Legal (LGPD Art. 7º)</h2>
+        <table class="data-table">
+          <thead><tr><th>Finalidade</th><th>Base Legal</th></tr></thead>
+          <tbody>
+            <tr><td>Exibição de conteúdo pedagógico por turma</td><td>Legítimo Interesse (IX)</td></tr>
+            <tr><td>Envio de notificações escolares</td><td>Legítimo Interesse (IX)</td></tr>
+            <tr><td>Acesso administrativo de professores</td><td>Consentimento (I)</td></tr>
+            <tr><td>Funcionamento técnico do Web App (cookies essenciais)</td><td>Legítimo Interesse (IX)</td></tr>
+            <tr><td>Análise de uso anônima para melhoria do serviço</td><td>Legítimo Interesse (IX)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-block" data-toc="Permissões do Dispositivo (Android)">
+        <h2><span class="num">7</span> Permissões do Dispositivo — Android</h2>
+        <ul>
+          <li><strong>Notificações [Android 13+]:</strong> Para enviar avisos via push notifications.</li>
+          <li><strong>Acesso à Internet:</strong> Indispensável para carregar conteúdo atualizado.</li>
+          <li><strong>Armazenamento/Cache:</strong> Dados temporários para acelerar o carregamento. Podem ser limpos em Configurações → Limpar Dados do app ou nas configurações do SO.</li>
+        </ul>
+      </div>
+
+      <div class="section-block" data-toc="Política de Cookies (Web App)">
+        <h2><span class="num">8</span> Política de Cookies — Web App</h2>
+        <p>O InfinityEd Web App utiliza <strong>cookies e tecnologias similares</strong> (localStorage, sessionStorage) para garantir o funcionamento correto da plataforma, em conformidade com a LGPD e boas práticas internacionais.</p>
+        <div class="callout info">
+          <span class="callout-icon">&#x1F36A;</span>
+          <div><strong>O que são Cookies?</strong>Cookies são pequenos arquivos de texto armazenados pelo seu navegador. No InfinityEd Web App, utilizamos principalmente o <em>localStorage</em> do navegador para persistir preferências entre sessões, sem necessidade de login por parte dos alunos.</div>
+        </div>
+
+        <h3>8.1 — Cookies Essenciais</h3>
+        <p>Necessários para o funcionamento básico do Web App. <strong>Não podem ser desativados.</strong></p>
+        <div class="cookie-card">
+          <div class="cookie-card-header"><span class="cookie-dot essential"></span> Cookies Essenciais — sempre ativos</div>
+          <table>
+            <thead><tr><th>Nome / Chave</th><th>Tipo</th><th>Duração</th><th>Finalidade</th></tr></thead>
+            <tbody>
+              <tr><td><code>ie_serie</code></td><td>localStorage</td><td>Persistente</td><td>Série selecionada para filtro de conteúdo</td></tr>
+              <tr><td><code>ie_turma</code></td><td>localStorage</td><td>Persistente</td><td>Turma selecionada para exibição personalizada</td></tr>
+              <tr><td><code>ie_turno</code></td><td>localStorage</td><td>Persistente</td><td>Turno (matutino/vespertino/noturno) selecionado</td></tr>
+              <tr><td><code>ie_theme</code></td><td>localStorage</td><td>Persistente</td><td>Preferência de tema visual (claro/escuro)</td></tr>
+              <tr><td><code>firebase:authUser</code></td><td>localStorage</td><td>Sessão / renovável</td><td>Token de autenticação do professor (Firebase Auth)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>8.2 — Cookies Funcionais</h3>
+        <p>Melhoram a experiência do usuário. Gerenciáveis via configurações do navegador.</p>
+        <div class="cookie-card">
+          <div class="cookie-card-header"><span class="cookie-dot functional"></span> Cookies Funcionais</div>
+          <table>
+            <thead><tr><th>Nome / Chave</th><th>Tipo</th><th>Duração</th><th>Finalidade</th></tr></thead>
+            <tbody>
+              <tr><td><code>ie_notif_dismissed</code></td><td>localStorage</td><td>30 dias</td><td>Registra se o banner de notificações foi dispensado</td></tr>
+              <tr><td><code>ie_onboarding_done</code></td><td>localStorage</td><td>Persistente</td><td>Indica que o onboarding inicial foi concluído</td></tr>
+              <tr><td><code>ie_last_visit</code></td><td>localStorage</td><td>Persistente</td><td>Data da última visita — destaca novidades desde o último acesso</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>8.3 — Cookies de Terceiros (Firebase / Vercel)</h3>
+        <p>Gerados por serviços externos para funcionamento da infraestrutura.</p>
+        <div class="cookie-card">
+          <div class="cookie-card-header"><span class="cookie-dot third"></span> Cookies de Terceiros</div>
+          <table>
+            <thead><tr><th>Origem</th><th>Finalidade</th><th>Política</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Google Firebase</strong></td><td>Autenticação, sincronização do banco de dados em tempo real e SDK</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Ver →</a></td></tr>
+              <tr><td><strong>Vercel</strong></td><td>Cookies técnicos de roteamento e cache da CDN para entrega do Web App</td><td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Ver →</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>8.4 — Como Gerenciar Cookies</h3>
+        <ul>
+          <li><strong>Google Chrome:</strong> Configurações → Privacidade e segurança → Cookies</li>
+          <li><strong>Firefox:</strong> Configurações → Privacidade e segurança → Cookies e dados do site</li>
+          <li><strong>Safari:</strong> Preferências → Privacidade → Gerenciar dados do site</li>
+          <li><strong>No InfinityEd:</strong> Menu ☰ → Configurações → Limpar Dados Locais</li>
+        </ul>
+        <div class="callout warn">
+          <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+          <div><strong>Atenção</strong>A exclusão de cookies essenciais pode fazer o app esquecer suas preferências de turma/série, exigindo nova configuração.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Segurança da Informação">
+        <h2><span class="num">9</span> Segurança da Informação</h2>
+        <div class="pill-grid">
+          <span class="pill blue">HTTPS/TLS em todas as conexões</span>
+          <span class="pill blue">Regras de segurança do Firestore</span>
+          <span class="pill blue">Tokens com expiração automática</span>
+          <span class="pill green">Coleta mínima de dados</span>
+          <span class="pill green">Anonimização de dados de alunos</span>
+          <span class="pill green">Senhas nunca armazenadas em texto claro</span>
+        </div>
+        <div class="callout danger">
+          <span class="callout-icon">&#x26A1;</span>
+          <div><strong>Limitação de Responsabilidade</strong>Nenhum sistema é 100% inviolável. O desenvolvedor não se responsabiliza por interceptações ou violações decorrentes de falhas no dispositivo do usuário (vírus, root, redes públicas não seguras).</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Seus Direitos (LGPD Arts. 17–22)">
+        <h2><span class="num">10</span> Seus Direitos como Titular (LGPD Arts. 17–22)</h2>
+        <table class="data-table">
+          <thead><tr><th>Direito</th><th>Como exercer</th></tr></thead>
+          <tbody>
+            <tr><td>&#x2705; Confirmação e acesso aos dados</td><td>E-mail ao DPO</td></tr>
+            <tr><td>&#x270F;&#xFE0F; Correção de dados incompletos</td><td>Solicitação à administração escolar</td></tr>
+            <tr><td>&#x1F5D1;&#xFE0F; Eliminação de dados pessoais</td><td>Alunos: limpar dados do navegador/app. Professores: solicitar ao DPO</td></tr>
+            <tr><td>&#x1F4E6; Portabilidade</td><td>Solicitação ao DPO</td></tr>
+            <tr><td>&#x1F6AB; Revogação do consentimento</td><td>Solicitar ao DPO ou administração escolar</td></tr>
+            <tr><td>&#x2139;&#xFE0F; Informação sobre compartilhamento</td><td>Detalhado na Seção 5</td></tr>
+          </tbody>
+        </table>
+        <div class="callout success">
+          <span class="callout-icon">&#x1F476;</span>
+          <div><strong>Proteção Especial de Menores — Art. 14 LGPD + ECA Digital</strong>Pais e responsáveis legais podem solicitar informações ou exclusão de qualquer dado relacionado a seus filhos menores de 18 anos, entrando em contato pelo e-mail do DPO.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Retenção e Exclusão de Dados">
+        <h2><span class="num">11</span> Retenção e Exclusão de Dados</h2>
+        <ul>
+          <li><strong>Alunos:</strong> Sem dados pessoais identificáveis — basta limpar os dados do navegador ou desinstalar o app.</li>
+          <li><strong>Professores:</strong> Dados mantidos enquanto houver vínculo ativo. Exclusão mediante solicitação ao DPO.</li>
+          <li><strong>Tokens (OneSignal/FCM):</strong> Expiram automaticamente ou são removidos ao desinstalar o app.</li>
+          <li><strong>Cookies/localStorage (Web):</strong> Persistem até limpeza manual ou conforme tabela da Seção 8.</li>
+        </ul>
+      </div>
+
+      <div class="section-block" data-toc="Alterações nesta Política">
+        <h2><span class="num">12</span> Alterações nesta Política</h2>
+        <p>Esta Política pode ser atualizada periodicamente. Alterações relevantes serão comunicadas via notificação no app ou Web App. A data "Versão" no cabeçalho indica a versão vigente. O uso continuado constitui aceite das alterações.</p>
+      </div>
+
+      <div class="section-block" data-toc="Contato e DPO">
+        <h2><span class="num">13</span> Contato e Encarregado de Dados (DPO)</h2>
+        <div class="contact-card">
+          <div class="contact-row"><span class="contact-label">E-mail DPO</span><a href="mailto:infinityed.contato@proton.me">infinityed.contato@proton.me</a></div>
+          <div class="contact-row"><span class="contact-label">Unidade</span><span>Col. Est. Dr. Onério Pereira Vieira — Quirinópolis, GO</span></div>
+          <div class="contact-row"><span class="contact-label">ANPD</span><a href="https://www.gov.br/anpd" target="_blank" rel="noopener">gov.br/anpd</a></div>
+        </div>
+        <p style="margin-top:.7rem;font-size:.82rem;color:var(--muted-fg)">Você também pode registrar reclamações diretamente na Autoridade Nacional de Proteção de Dados (ANPD).</p>
+      </div>
+
+    </div><!-- /privacy -->
+
+    <!-- TERMOS E CONDIÇÕES -->
+    <div id="terms" class="page">
+
+      <div class="section-block" data-toc="Aceitação dos Termos">
+        <h2><span class="num">1</span> Aceitação dos Termos</h2>
+        <p>Ao acessar ou utilizar o <strong>InfinityEd</strong> — seja pelo Web App (<a href="https://infinityed.vercel.app" target="_blank" rel="noopener">infinityed.vercel.app</a>) ou pelo aplicativo Android — você declara ter lido, compreendido e concordado integralmente com estes Termos e Condições de Uso.</p>
+        <div class="callout warn">
+          <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+          <div><strong>Menores de Idade</strong>O InfinityEd é destinado ao uso no ambiente escolar do Colégio Est. Dr. Onério Pereira Vieira. O uso por estudantes menores de 18 anos é autorizado no contexto educacional previsto, não exigindo consentimento parental para funcionalidades que não coletam dados pessoais identificáveis.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Descrição do Serviço">
+        <h2><span class="num">2</span> Descrição do Serviço</h2>
+        <p>O InfinityEd é uma plataforma educacional digital que oferece:</p>
+        <ul>
+          <li>Visualização de <strong>horários de aulas e cardápio escolar</strong> por turma</li>
+          <li>Acesso a <strong>comunicados, avisos e informações</strong> da unidade escolar</li>
+          <li>Sistema de <strong>notificações push</strong> para eventos e novidades</li>
+          <li>Painel administrativo restrito para <strong>professores e gestão</strong></li>
+        </ul>
+        <div class="pill-grid">
+          <span class="pill blue">Web App React (principal)</span>
+          <span class="pill orange">Android App</span>
+          <span class="pill green">Uso Educacional Gratuito</span>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Uso Permitido">
+        <h2><span class="num">3</span> Uso Permitido</h2>
+        <p>O InfinityEd pode ser utilizado exclusivamente para finalidades educacionais e informativas no contexto da comunidade escolar:</p>
+        <ul>
+          <li>Consultar horários, cardápio e comunicados escolares</li>
+          <li>Receber notificações sobre eventos e avisos da escola</li>
+          <li>Publicar conteúdo educacional (exclusivo para professores credenciados)</li>
+          <li>Compartilhar informações da plataforma entre membros da comunidade escolar</li>
+        </ul>
+      </div>
+
+      <div class="section-block" data-toc="Usos Proibidos">
+        <h2><span class="num">4</span> Usos Proibidos</h2>
+        <p>É <strong>expressamente proibido</strong>:</p>
+        <ul>
+          <li>Utilizar o InfinityEd para fins comerciais, propaganda política ou religiosa</li>
+          <li>Tentar acessar áreas restritas sem autorização</li>
+          <li>Publicar conteúdo ofensivo, discriminatório, violento ou inapropriado ao ambiente escolar</li>
+          <li>Compartilhar credenciais de acesso com terceiros não autorizados</li>
+          <li>Fazer engenharia reversa, descompilar ou modificar o aplicativo</li>
+          <li>Utilizar scripts automáticos, bots ou qualquer forma de acesso não humano</li>
+          <li>Praticar qualquer ato que viole o <strong>ECA (Lei nº 8.069/1990)</strong> ou o <strong>ECA Digital</strong></li>
+          <li>Coletar dados de outros usuários da plataforma</li>
+        </ul>
+        <div class="callout danger">
+          <span class="callout-icon">&#x1F6AB;</span>
+          <div><strong>Violações podem resultar em</strong> suspensão imediata do acesso, comunicação à direção escolar e, em casos graves, representação junto às autoridades competentes.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Contas de Professor">
+        <h2><span class="num">5</span> Contas de Professor e Acesso Administrativo</h2>
+        <ul>
+          <li>O cadastro de professores é realizado <strong>exclusivamente pela administração do sistema</strong>.</li>
+          <li>As credenciais são entregues pessoalmente e de forma confidencial.</li>
+          <li>O professor é <strong>integralmente responsável</strong> pelo conteúdo publicado sob sua conta.</li>
+          <li>Credenciais não devem ser compartilhadas. Em caso de comprometimento, comunicar imediatamente a administração.</li>
+          <li>A administração pode revogar credenciais a qualquer momento, mediante justificativa.</li>
+        </ul>
+      </div>
+
+      <div class="section-block" data-toc="Propriedade Intelectual">
+        <h2><span class="num">6</span> Propriedade Intelectual</h2>
+        <p>Todo o conteúdo do InfinityEd — código-fonte, design, marca, logo e funcionalidades — é propriedade da equipe de desenvolvimento. É proibida a reprodução, distribuição ou modificação sem autorização expressa por escrito.</p>
+        <p>O conteúdo publicado por professores permanece de propriedade intelectual de seus respectivos autores, sendo o InfinityEd apenas o veículo de distribuição no contexto escolar.</p>
+      </div>
+
+      <div class="section-block" data-toc="Disponibilidade do Serviço">
+        <h2><span class="num">7</span> Disponibilidade do Serviço</h2>
+        <p>O InfinityEd se esforça para manter o serviço disponível, mas <strong>não garante disponibilidade ininterrupta</strong>. Podem ocorrer interrupções por manutenção programada, falhas em serviços de terceiros (Firebase, Vercel, OneSignal) ou casos de força maior.</p>
+        <p>O InfinityEd é um projeto educacional sem fins lucrativos e, portanto, <strong>não oferece SLA formal</strong>.</p>
+      </div>
+
+      <div class="section-block" data-toc="Isenção de Responsabilidade">
+        <h2><span class="num">8</span> Isenção de Responsabilidade</h2>
+        <p>O InfinityEd não se responsabiliza por:</p>
+        <ul>
+          <li>Inexatidões em conteúdos publicados por professores ou gestão</li>
+          <li>Perdas ou danos decorrentes do uso ou impossibilidade de uso do serviço</li>
+          <li>Decisões tomadas com base exclusiva nas informações da plataforma</li>
+          <li>Problemas técnicos no dispositivo ou conexão do usuário</li>
+          <li>Conteúdo de sites de terceiros linkados na plataforma</li>
+        </ul>
+        <div class="callout info">
+          <span class="callout-icon">&#x2139;&#xFE0F;</span>
+          <div>As informações têm caráter <strong>informativo e complementar</strong>. Em caso de dúvidas sobre avisos escolares, consulte sempre a secretaria ou coordenação do Colégio.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Proteção de Menores (ECA)">
+        <h2><span class="num">9</span> Proteção de Menores — ECA e ECA Digital</h2>
+        <p>Em conformidade com o <strong>ECA (Lei nº 8.069/1990)</strong> e o <strong>ECA Digital (Lei nº 13.431/2017)</strong>:</p>
+        <ul>
+          <li>É proibida a publicação de qualquer conteúdo que viole os direitos de crianças e adolescentes</li>
+          <li>É proibido conteúdo que exponha, identifique ou coloque em risco estudantes menores de idade</li>
+          <li>Imagens ou informações que possam identificar alunos individualmente não devem ser publicadas</li>
+          <li>Qualquer suspeita de uso da plataforma em prejuízo de menores deve ser comunicada à direção e às autoridades competentes</li>
+        </ul>
+        <div class="callout success">
+          <span class="callout-icon">&#x1F6E1;&#xFE0F;</span>
+          <div><strong>Melhor Interesse do Menor</strong>O InfinityEd adota como princípio fundamental o <strong>melhor interesse da criança e do adolescente</strong> em todas as suas funcionalidades e decisões de design.</div>
+        </div>
+      </div>
+
+      <div class="section-block" data-toc="Modificações nos Termos">
+        <h2><span class="num">10</span> Modificações nos Termos</h2>
+        <p>Reservamo-nos o direito de modificar estes Termos a qualquer momento. As alterações entram em vigor imediatamente após publicação. Para mudanças significativas, os usuários serão notificados pelo próprio aplicativo. O uso continuado implica aceite das modificações.</p>
+      </div>
+
+      <div class="section-block" data-toc="Lei Aplicável e Foro">
+        <h2><span class="num">11</span> Lei Aplicável e Foro</h2>
+        <p>Estes Termos são regidos pelas leis da República Federativa do Brasil, especialmente:</p>
+        <ul>
+          <li><strong>LGPD</strong> — Lei nº 13.709/2018</li>
+          <li><strong>Marco Civil da Internet</strong> — Lei nº 12.965/2014</li>
+          <li><strong>ECA</strong> — Lei nº 8.069/1990</li>
+          <li><strong>ECA Digital</strong> — Lei nº 13.431/2017</li>
+          <li><strong>CDC</strong> — Lei nº 8.078/1990 (quando aplicável)</li>
+        </ul>
+        <p>Fica eleito o foro da Comarca de <strong>Quirinópolis, Estado de Goiás</strong>, para dirimir quaisquer controvérsias.</p>
+      </div>
+
+      <div class="section-block" data-toc="Contato">
+        <h2><span class="num">12</span> Contato</h2>
+        <div class="contact-card">
+          <div class="contact-row"><span class="contact-label">E-mail</span><a href="mailto:infinityed.contato@proton.me">infinityed.contato@proton.me</a></div>
+          <div class="contact-row"><span class="contact-label">Plataforma</span><a href="https://infinityed.vercel.app" target="_blank" rel="noopener">infinityed.vercel.app</a></div>
+          <div class="contact-row"><span class="contact-label">Unidade</span><span>Col. Est. Dr. Onério Pereira Vieira — Quirinópolis, GO</span></div>
+        </div>
+      </div>
+
+    </div><!-- /terms -->
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg aria-hidden="true"><use href="#ie-logo"/></svg>
+    <span class="footer-logo-name">InfinityEd</span>
+    <span style="color:var(--border);margin:0 .25rem">·</span>
+    <span style="font-weight:500;font-size:.78rem">© 2026 Quirinópolis, GO</span>
+  </div>
+  <nav class="footer-links">
+    <a href="https://infinityed.vercel.app" target="_blank" rel="noopener">Web App</a>
+    <a href="mailto:infinityed.contato@proton.me">Contato</a>
+    <a href="https://www.gov.br/anpd" target="_blank" rel="noopener">ANPD</a>
+  </nav>
+</footer>
+
+<button id="scrollTop" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#x2191;</button>
+
+<script>
+  function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    const meta = {
+      privacy: { h1: 'Política de <em>Privacidade</em>', sub: 'Transparência total sobre como o InfinityEd coleta, usa e protege seus dados — em conformidade com a LGPD e o ECA Digital.' },
+      terms:   { h1: 'Termos e <em>Condições</em>',      sub: 'Regras de uso da plataforma InfinityEd para alunos, professores e demais membros da comunidade escolar.' }
+    };
+    document.getElementById('heroTitle').innerHTML = meta[id].h1;
+    document.getElementById('heroSub').textContent  = meta[id].sub;
+    buildToc(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function buildToc(pageId) {
+    const blocks = document.getElementById(pageId).querySelectorAll('.section-block[data-toc]');
+    const list   = document.getElementById('tocList');
+    list.innerHTML = '';
+    blocks.forEach((block, i) => {
+      const id = 'sec-' + pageId + '-' + i;
+      block.id = id;
+      const li = document.createElement('li');
+      li.innerHTML = '<a href="#' + id + '">' + block.getAttribute('data-toc') + '</a>';
+      list.appendChild(li);
+    });
+    updateActiveToc();
+  }
+
+  function updateActiveToc() {
+    const links = document.querySelectorAll('.toc-list a');
+    const scrollY = window.scrollY + 90;
+    let active = null;
+    links.forEach(link => {
+      const t = document.querySelector(link.getAttribute('href'));
+      if (t && t.offsetTop <= scrollY) active = link;
+    });
+    links.forEach(l => l.classList.remove('active'));
+    if (active) active.classList.add('active');
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+    updateActiveToc();
+  }, { passive: true });
+
+  buildToc('privacy');
+</script>
+</body>
+</html>
